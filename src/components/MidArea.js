@@ -24,17 +24,20 @@ export default function MidArea() {
   const [, drop] = useDrop({
     accept: "command",
     drop(item, monitor) {
+      const didDrop = monitor.didDrop();
+      if (didDrop) {
+          return;
+      }
       const delta = monitor.getClientOffset();
       const left = delta.x;
       const top = delta.y;
-      console.log(monitor.getClientOffset());
       createOrUpdateCommand(item.children, item.bg, left, top, item.dropped, item.id)
     }
   })
 
   return <div ref={drop} className="h-full flex-1 overflow-auto block">{"mid area"} 
       {commands.map((item, index)=>(
-        <DraggableCommand bg={item.bg} absolute top={item.top} left={item.left} dropped id={item.id}>{item.data}</DraggableCommand>
+        <DraggableCommand bg={item.bg} absolute top={item.top} left={item.left} dropped id={item.id} key={item.id} commands={commands} setCommands={setCommands}>{item.data}</DraggableCommand>
       ))}
   </div>;
 }
