@@ -57,6 +57,18 @@ export default function Sidebar({commands, setCommands}) {
       </DraggableCommand>
 
       <div className="font-bold"> {"Control"} </div>
+
+      <DraggableCommand bg="orange">
+        {"Wait 1 seconds"}
+      </DraggableCommand>
+
+      <DraggableCommand bg="orange">
+        {"Stop all"}
+      </DraggableCommand>
+
+      <DraggableCommand bg="orange">
+        {"Wait until"}
+      </DraggableCommand>
     </div>
   );
 }
