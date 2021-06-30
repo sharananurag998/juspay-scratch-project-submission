@@ -3,20 +3,19 @@ import {useDrop} from "react-dnd"
 import DraggableCommand from "./DraggableCommand";
 import update from 'immutability-helper';
 
-function SnapCommandArea({top, left, commands, setCommands, bottom}) {
+function SnapCommandArea({top, left, commands, setCommands, bottom, lastId, setLastId}) {
     const [isHovered, setIsHovered] = useState(false); //Stores if an element is hovered above this area
-    const [command, setCommand] = useState(null);
     const [collectedProps, drop] = useDrop({
         accept: "command",
         hover(item, monitor) {
             setIsHovered(true);
-        //   createOrUpdateCommand(item.children, item.bg, left, top, item.dropped, item.id)
         },
         drop(item, monitor){
             console.log("Dropped");
             if(!item.dropped){
                 //If the command is not already present in canvas, create a new command
-                setCommands(old=>[...old, {data: item.children, bg: item.bg, left, top: bottom?top+28:top-28, id: commands.length}])
+                setCommands(old=>[...old, {data: item.children, bg: item.bg, left, top: bottom?top+28:top-28, id: lastId+1}])
+                setLastId(old=>old+1)
             }
             else{
                 //If the command is already present in canvas, update the x, y coordinates of command

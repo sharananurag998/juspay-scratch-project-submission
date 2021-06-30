@@ -3,13 +3,13 @@ import {useDrop} from "react-dnd"
 import DraggableCommand from "./DraggableCommand";
 import update from 'immutability-helper';
 
-export default function MidArea() {
+export default function MidArea({commands, setCommands, lastId, setLastId}) {
   const ref = useRef(null)
-  const [commands, setCommands] = useState([]);
   const createOrUpdateCommand = useCallback((children, bg, left, top, dropped, id) => {
       if(!dropped){
         //If the command is not already present in canvas, create a new command
-        setCommands(old=>[...old, {data: children, bg, left, top, id: commands.length}])
+        setCommands(old=>[...old, {data: children, bg, left, top, id: lastId+1}])
+        setLastId(old=>old+1)
       }
       else{
         //If the command is already present in canvas, update the x, y coordinates of command
@@ -26,7 +26,7 @@ export default function MidArea() {
     drop(item, monitor) {
       const didDrop = monitor.didDrop();
       if (didDrop) {
-          return;
+          return; //If dropped in child, return from function
       }
       const delta = monitor.getClientOffset();
       const left = delta.x;
@@ -37,7 +37,7 @@ export default function MidArea() {
 
   return <div ref={drop} className="h-full flex-1 overflow-auto block">{"mid area"} 
       {commands.map((item, index)=>(
-        <DraggableCommand bg={item.bg} absolute top={item.top} left={item.left} dropped id={item.id} key={item.id} commands={commands} setCommands={setCommands}>{item.data}</DraggableCommand>
+        <DraggableCommand bg={item.bg} absolute top={item.top} left={item.left} dropped id={item.id} key={item.id} commands={commands} setCommands={setCommands} lastId={lastId} setLastId={setLastId}>{item.data}</DraggableCommand>
       ))}
   </div>;
 }
