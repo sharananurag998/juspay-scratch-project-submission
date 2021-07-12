@@ -35,7 +35,7 @@ export default function MidArea({commands, setCommands, lastId, setLastId}) {
     }
   })
 
-  return <div ref={drop} className="h-full flex-1 overflow-auto block">{"mid area"} 
+  return <div ref={drop} className="h-full flex-1 overflow-auto block">
       {commands.map((item, index)=>(
         <DraggableCommand bg={item.bg} absolute top={item.top} left={item.left} dropped id={item.id} key={item.id} commands={commands} setCommands={setCommands} lastId={lastId} setLastId={setLastId}>{item.data}</DraggableCommand>
       ))}
