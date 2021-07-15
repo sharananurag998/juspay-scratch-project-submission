@@ -14,7 +14,7 @@ function SnapCommandArea({top, left, commands, setCommands, bottom, lastId, setL
             console.log("Dropped");
             if(!item.dropped){
                 //If the command is not already present in canvas, create a new command
-                setCommands(old=>[...old, {data: item.children, bg: item.bg, left, top: bottom?top+28:top-28, id: lastId+1}])
+                setCommands(old=>[...old, {data: item.children, bg: item.bg, left, top: bottom?top+28:top-28, id: lastId+1, action: item.action, value:item.value}])
                 setLastId(old=>old+1)
             }
             else{

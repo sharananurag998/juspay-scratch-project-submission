@@ -20,7 +20,7 @@ const spriteList = [
   }
 ]
 
-export default function PreviewArea({sprites, setSprites, currentSprite, setCurrentSprite}) {
+export default function PreviewArea({sprites, setSprites, currentSprite, setCurrentSprite, spriteTop, spriteLeft, spriteRotate, bubbleOpen}) {
   const [spriteSelectorOpen, setSpriteSelectorOpen] = useState(false)
 
   const addSprite = (index) => {
@@ -33,11 +33,11 @@ export default function PreviewArea({sprites, setSprites, currentSprite, setCurr
   }
 
   return (
-    <div className="flex items-start flex-row flex-wrap flex-none h-full overflow-y-auto p-2">
+    <div className="flex items-start h-full w-full overflow-y-auto p-2 relative">
       {
         sprites?.map((item, index)=>(
-          <div className="p-1 hover:bg-gray-400 cursor-pointer">
-            <CatSprite fill={spriteList[item].fill} key={index} />
+          <div className="p-1">
+            <CatSprite fill={spriteList[item].fill} key={index} spriteTop={spriteTop} spriteLeft={spriteLeft} spriteRotate={spriteRotate} bubbleOpen={bubbleOpen}/>
           </div>
         ))
       }

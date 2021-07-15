@@ -3,10 +3,10 @@ import React from 'react'
 import { useDrag } from 'react-dnd'
 import SnapCommandArea from './SnapCommandArea';
 
-function DraggableCommand({children, bg, absolute=false, left=0, top=0, dropped=false, id, commands, setCommands, lastId, setLastId}) {
+function DraggableCommand({children, bg, absolute=false, left=0, top=0, dropped=false, id, commands, setCommands, lastId, setLastId, action, value}) {
     const [{ isDragging }, drag] = useDrag(() => ({
         type: 'command',
-        item: {children, bg, left, top, dropped, id},
+        item: {children, bg, left, top, dropped, id, action, value},
         collect: (monitor) => ({
             isDragging: monitor.isDragging()
         })

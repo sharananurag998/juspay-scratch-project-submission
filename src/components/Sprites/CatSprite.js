@@ -1,7 +1,8 @@
 import React from "react";
-
-export default function CatSprite({fill}) {
+import ChatBubble from "../ChatBubble";
+export default function CatSprite({fill, spriteTop, spriteLeft, spriteRotate, bubbleOpen}) {
   return (
+    <>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="95.17898101806641"
@@ -9,6 +10,8 @@ export default function CatSprite({fill}) {
       viewBox="0.3210171699523926 0.3000000357627869 95.17898101806641 100.04156036376953"
       version="1.1"
       xmlSpace="preserve"
+      className="absolute"
+      style={{top: spriteTop, left: spriteLeft, transform: `rotate(${spriteRotate}deg)`}}
     >
       <g>
         <g id="Page-1" stroke="none" fillRule="evenodd">
@@ -180,5 +183,7 @@ export default function CatSprite({fill}) {
         </g>
       </g>
     </svg>
+    {bubbleOpen&&<ChatBubble top={spriteTop} left={spriteLeft} text="Hello"/>}
+    </>
   );
 }
